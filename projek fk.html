@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOTEKA NEWS - Menceritakan Nusantara</title>
+    
+    <!-- Google Fonts: Montserrat & Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- GAYA UMUM & VARIABEL WARNA --- */
+        :root {
+            --primary-color: #0052cc;       /* Biru Terang */
+            --secondary-color: #0a0e27;     /* Biru Tua Sekali */
+            --accent-color: #6a5acd;        /* Aksen Ungu dari Logo */
+            --text-color: #333;
+            --light-gray: #f7f9fc;          /* Latar Belakang Lebih Halus */
+            --border-color: #e0e6ed;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- HEADER --- */
+        .top-bar {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.9em;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .social-links a {
+            color: var(--white);
+            margin-left: 15px;
+            font-size: 1.1em;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .main-header {
+            background-color: var(--white);
+            padding: 20px 0;
+            border-bottom: 3px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* --- LOGO & TEKS ANIMASI (RAPI) --- */
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 60px;
+            width: auto;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 12px var(--accent-color));
+        }
+        .logo-text-wrapper {
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            line-height: 1;
+            animation: subtleGlow 3s ease-in-out infinite;
+        }
+        @keyframes subtleGlow {
+            0%, 100% { text-shadow: 0 0 8px rgba(106, 90, 205, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(106, 90, 205, 0.8); }
+        }
+        .logo-text .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: letterFadeIn 0.5s ease forwards;
+        }
+        @keyframes letterFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tagline {
+            font-size: 0.8em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        /* --- NAVIGASI --- */
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+        }
+        .main-nav ul li {
+            margin-left: 30px;
+        }
+        .main-nav ul li a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: var(--secondary-color);
+            font-size: 1em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .main-nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        .main-nav ul li a:hover::after, .main-nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* --- AREA UTAMA --- */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        /* --- BERITA UTAMA (HEADLINE) --- */
+        .headline {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .headline:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .headline-image-wrapper {
+            position: relative;
+        }
+        .headline img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .headline-image-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(10, 14, 39, 0.7), transparent);
+        }
+        .headline-content {
+            padding: 30px;
+        }
+        .headline-content .category {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .headline-content h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .headline-meta {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        .headline-meta i {
+            margin-right: 5px;
+        }
+
+        /* --- GRID BERITA TERKINI --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .news-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .news-card-content {
+            padding: 25px;
+        }
+        .news-card-content h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .news-card-meta {
+            font-size: 0.85em;
+            color: #777;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .sidebar-widget {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        .sidebar-widget h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        .sidebar-widget ul {
+            list-style: none;
+        }
+        .sidebar-widget ul li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .sidebar-widget ul li:last-child {
+            border-bottom: none;
+        }
+        .sidebar-widget ul li a {
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .sidebar-widget ul li a:hover {
+            color: var(--primary-color);
+        }
+        .sidebar-widget ul li a i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        .btn-admin {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .btn-admin:hover { background-color: var(--primary-color); }
+
+        /* --- FOOTER --- */
+        .main-footer {
+            background-color: var(--secondary-color);
+            color: #aaa;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-section h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        .footer-section p, .footer-section ul {
+            font-size: 0.95em;
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        .footer-section ul li a {
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9em;
+        }
+
+        /* --- MODAL & ADMIN STYLES --- */
+        .overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1999; /* Login modal */
+            justify-content: center;
+            align-items: center;
+        }
+        .overlay.active {
+            display: flex;
+        }
+        .admin-overlay {
+            z-index: 2000; /* Admin panel on top */
+        }
+        .modal-container {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .login-container {
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-container h1 { margin-bottom: 20px; text-align: center; }
+        .close-modal-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+        .close-modal-btn:hover { color: var(--secondary-color); }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        .form-group textarea { resize: vertical; min-height: 150px; }
+        .btn-submit, .btn-login {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-submit:hover, .btn-login:hover { background-color: var(--accent-color); }
+        .message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .message.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .message.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .article-list { margin-top: 40px; }
+        .article-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .article-item h4 { margin: 0; }
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-delete:hover { background-color: #c82333; }
+        .newly-added {
+            background-color: #e7f3ff;
+            border-left: 4px solid var(--primary-color);
+            animation: highlightFade 3s ease-out forwards;
+        }
+        @keyframes highlightFade {
+            from { background-color: #c2e0ff; }
+            to { background-color: #e7f3ff; }
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .main-content { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .main-header .container { flex-direction: column; }
+            .logo-link { margin-bottom: 15px; }
+            .logo-text { font-size: 1.5em; }
+            .tagline { font-size: 0.7em; }
+            .main-nav { width: 100%; }
+            .main-nav ul { display: none; flex-direction: column; width: 100%; text-align: center; }
+            .main-nav ul.active { display: flex; }
+            .main-nav ul li { margin: 10px 0; }
+            .hamburger { display: flex; position: absolute; top: 25px; right: 20px; }
+            .headline img { height: 250px; }
+            .headline-content h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <span id="current-date"></span>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/g/1Gbs9ix6gq/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://youtube.com/@kotekanew?si=EdjrFRVP-G_ERCnn" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="mailto:newskoteka3@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Utama -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="https://z-cdn-media.chatglm.cn/files/f168b1eb-5965-4721-a8e5-7114764e56ae_Black%20&%20Blue%20Minimalist%20Modern%20Initial%20Font%20Logo-fotor-2024080964846.png?auth_key=1761987236-3b8510a15e26484dbd7497cedb3dadda-0-0a1972a785c2aff59a81b284133fc9d5" alt="KOTEKA NEWS Logo" class="logo-img">
+                <div class="logo-text-wrapper">
+                    <span class="logo-text">KOTEKA NEWS</span>
+                    <p class="tagline">Menceritakan Nusantara</p>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul id="nav-menu">
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="#">Papua</a></li>
+                    <li><a href="#">Nasional</a></li>
+                    <li><a href="#">Daerah</a></li>
+                    <li><a href="#">Olahraga</a></li>
+                    <li><a href="#">Teknologi</a></li>
+                    <li><a href="#">Budaya</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Area Konten Utama -->
+    <div class="container">
+        <div class="main-content">
+            <main id="main-content">
+                <!-- Konten berita akan dimuat di sini oleh JavaScript -->
+            </main>
+
+            <!-- Kolom Kanan: Sidebar -->
+            <aside class="sidebar">
+                <!-- Widget Berita Populer -->
+                <div class="sidebar-widget">
+                    <h3>Berita Populer</h3>
+                    <ul id="popular-news-list">
+                        <!-- Akan dimuat oleh JavaScript -->
+                    </ul>
+                </div>
+                <!-- Widget Kategori -->
+                <div class="sidebar-widget">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-tag"></i> Papua (45)</a></li>
+                        <li><a href="#"><i class="fas fa-tag"></i> Nasional (125)</a></li>
+                        <li><a href="#"><i class="fas fa-tag"></i> Ekonomi (78)</a></li>
+                        <li><a href="#"><i class="fas fa-tag"></i> Teknologi (93)</a></li>
+                        <li><a href="#"><i class="fas fa-tag"></i> Budaya (54)</a></li>
+                    </ul>
+                </div>
+                <!-- Widget Admin Link -->
+                <div class="sidebar-widget" style="text-align: center;">
+                    <a href="#" id="open-login-btn" class="btn-admin"><i class="fas fa-user-shield"></i> Admin Panel</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Tentang KOTEKA NEWS</h4>
+                    <p>KOTEKA NEWS adalah portal berita online yang fokus menyajikan informasi terkini, akurat, dan terpercaya, dengan sorotan khusus pada perkembangan di Papua dan Indonesia Timur. Kami berkomitmen menjadi suara bagi Nusantara.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Link Cepat</h4>
+                    <ul>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hubungi Kami</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:newskoteka3@gmail.com">newskoteka3@gmail.com</a></li>
+                        <li><i class="fab fa-facebook"></i> Facebook: <a href="https://www.facebook.com/share/g/1Gbs9ix6gq/" target="_blank">Koteka News</a></li>
+                        <li><i class="fab fa-youtube"></i> YouTube: <a href="https://youtube.com/@kotekanew?si=EdjrFRVP-G_ERCnn" target="_blank">@kotekanew</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 KOTEKA NEWS. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-overlay" class="overlay">
+        <div class="modal-container login-container">
+            <h1>Admin Login</h1>
+            <div id="login-message-area"></div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-login">Masuk</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-overlay" class="overlay admin-overlay">
+        <div class="modal-container">
+            <span class="close-modal-btn" id="close-admin-btn">&times;</span>
+            <h1>Admin Panel</h1>
+            <div id="message-area"></div>
+            <form id="add-article-form">
+                <div class="form-group">
+                    <label for="title">Judul Berita</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategori</label>
+                    <select id="category" name="category" required>
+                        <option value="Papua">Papua</option>
+                        <option value="Nasional">Nasional</option>
+                        <option value="Daerah">Daerah</option>
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Teknologi">Teknologi</option>
+                        <option value="Budaya">Budaya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="image-url">URL Gambar (Opsional)</label>
+                    <input type="text" id="image-url" name="image-url" placeholder="https://.../gambar.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="content">Konten Berita</label>
+                    <textarea id="content" name="content" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Terbitkan Berita</button>
+            </form>
+            <div class="article-list">
+                <h3>Semua Berita</h3>
+                <div id="articles-list">
+                    <!-- Daftar artikel akan dimuat di sini -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- KONFIGURASI ---
+        // Daftar password yang valid untuk login
+        const ADMIN_PASSWORDS = ['1234FRANS', 'KOTEKA2024'];
+
+        // --- FUNGSI UMUM ---
+        const getArticles = () => JSON.parse(localStorage.getItem('kotekaNewsArticles')) || [];
+        const saveArticles = (articles) => localStorage.setItem('kotekaNewsArticles', JSON.stringify(articles));
+
+        // --- DATA AWAL ---
+        const defaultArticles = [
+            { id: Date.now(), title: 'Festival Seni dan Budaya Lembah Baliem Kembali Digelar, Tampilkan Pesona Papua yang Memukau', category: 'Papua', imageUrl: 'https://picsum.photos/seed/papua-baliem-festival/800/400.jpg', content: 'Wamena - Festival Lembah Baliem, salah satu agenda budaya tahunan terbesar di Papua, kembali dibuka dengan meriah...', date: new Date().toISOString() },
+            { id: Date.now() + 1, title: 'Pemerintah Dorong Ekonomi Kreatif Lokal Papua Melalui Ekspor Batik Kayu', category: 'Ekonomi', imageUrl: 'https://picsum.photos/seed/papua-batik-kayu/400/250.jpg', content: 'Jakarta - Pemerintah pusat melalui Kementerian Perdagangan secara aktif mendorong para pelaku UMKM...', date: new Date().toISOString() },
+            { id: Date.now() + 2, title: 'Tim Peneliti Temukan Spesies Burung Cenderawasih Baru di Pegunungan Tengah Papua', category: 'Lingkungan', imageUrl: 'https://picsum.photos/seed/papua-cendrawasih/400/250.jpg', content: 'Jayapura - Sebuah tim peneliti internasional mengumumkan penemuan spesies baru burung Cenderawasih...', date: new Date().toISOString() },
+        ];
+        if (getArticles().length === 0) { saveArticles(defaultArticles); }
+
+        // --- ELEMEN DOM ---
+        const mainContent = document.getElementById('main-content');
+        const popularList = document.getElementById('popular-news-list');
+        const articlesList = document.getElementById('articles-list');
+        const addArticleForm = document.getElementById('add-article-form');
+        const messageArea = document.getElementById('message-area');
+
+        // Login Elements
+        const loginOverlay = document.getElementById('login-overlay');
+        const loginForm = document.getElementById('login-form');
+        const loginPasswordInput = document.getElementById('login-password');
+        const loginMessageArea = document.getElementById('login-message-area');
+        const openLoginBtn = document.getElementById('open-login-btn');
+
+        // Admin Elements
+        const adminOverlay = document.getElementById('admin-overlay');
+        const closeAdminBtn = document.getElementById('close-admin-btn');
+
+        // --- RENDER KONTEN BERITA (HALAMAN UTAMA) ---
+        const renderArticles = () => {
+            const articles = getArticles();
+            if (articles.length === 0) { mainContent.innerHTML = '<p>Belum ada berita.</p>'; return; }
+            articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const headline = articles[0];
+            const headlineHTML = `<article class="headline"><div class="headline-image-wrapper"><img src="${headline.imageUrl}" alt="${headline.title}"></div><div class="headline-content"><div class="category">${headline.category}</div><h1>${headline.title}</h1><div class="headline-meta"><i class="fas fa-user"></i> Tim Redaksi | <i class="fas fa-clock"></i> ${new Date(headline.date).toLocaleString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div><p>${headline.content.substring(0, 200)}...</p></div></article>`;
+            const otherArticles = articles.slice(1);
+            const gridHTML = otherArticles.map(article => `<article class="news-card"><img src="${article.imageUrl}" alt="${article.title}"><div class="news-card-content"><h3>${article.title}</h3><div class="news-card-meta"><i class="fas fa-tag"></i> ${article.category} | ${new Date(article.date).toLocaleDateString('id-ID')}</div></div></article>`).join('');
+            mainContent.innerHTML = headlineHTML + `<section class="news-grid">${gridHTML}</section>`;
+            const popularHTML = articles.slice(0, 3).map(article => `<li><a href="#"><i class="fas fa-chevron-right"></i> ${article.title}</a></li>`).join('');
+            popularList.innerHTML = popularHTML;
+        };
+
+        // --- LOGIKA ADMIN PANEL ---
+        const showMessage = (message, type) => { messageArea.innerHTML = `<div class="message ${type}">${message}</div>`; setTimeout(() => messageArea.innerHTML = '', 5000); };
+        const renderArticlesList = (highlightId = null) => {
+            const articles = getArticles(); articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+            if (articles.length === 0) { articlesList.innerHTML = '<p>Belum ada berita.</p>'; return; }
+            articlesList.innerHTML = articles.map(article => `<div class="article-item ${article.id === highlightId ? 'newly-added' : ''}" data-id="${article.id}"><div><h4>${article.title}</h4><small>${article.category} - ${new Date(article.date).toLocaleDateString('id-ID')}</small></div><button class="btn-delete" data-id="${article.id}">Hapus</button></div>`).join('');
+            document.querySelectorAll('.btn-delete').forEach(button => { button.addEventListener('click', (e) => { const articleId = parseInt(e.target.dataset.id); if (confirm('Apakah Anda yakin ingin menghapus berita ini?')) { deleteArticle(articleId); } }); });
+        };
+        const addArticle = (article) => { const articles = getArticles(); articles.unshift(article); saveArticles(articles); renderArticlesList(article.id); renderArticles(); addArticleForm.reset(); showMessage('Berita berhasil diterbitkan!', 'success'); };
+        const deleteArticle = (id) => { let articles = getArticles(); articles = articles.filter(article => article.id !== id); saveArticles(articles); renderArticlesList(); renderArticles(); showMessage('Berita berhasil dihapus!', 'success'); };
+        
+        // --- LOGIKA LOGIN ---
+        const showLoginMessage = (message, type) => { loginMessageArea.innerHTML = `<div class="message ${type}">${message}</div>`; setTimeout(() => loginMessageArea.innerHTML = '', 3000); };
+        
+        // --- EVENT LISTENERS ---
+        // Buka Login
+        openLoginBtn.addEventListener('click', (e) => { e.preventDefault(); loginOverlay.classList.add('active'); });
+        // Tutup Login (klik di luar)
+        loginOverlay.addEventListener('click', (e) => { if (e.target === loginOverlay) loginOverlay.classList.remove('active'); });
+        // Proses Login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const enteredPassword = loginPasswordInput.value;
+            // Cek apakah password ada di dalam daftar password yang valid
+            if (ADMIN_PASSWORDS.includes(enteredPassword)) {
+                loginOverlay.classList.remove('active');
+                loginPasswordInput.value = '';
+                adminOverlay.classList.add('active');
+                renderArticlesList();
+            } else {
+                showLoginMessage('Password salah! Coba lagi.', 'error');
+                loginPasswordInput.value = '';
+            }
+        });
+
+        // Tutup Admin Panel
+        closeAdminBtn.addEventListener('click', () => adminOverlay.classList.remove('active'));
+        adminOverlay.addEventListener('click', (e) => { if (e.target === adminOverlay) adminOverlay.classList.remove('active'); });
+        // Submit Artikel Baru
+        addArticleForm.addEventListener('submit', (e) => { e.preventDefault(); const newArticle = { id: Date.now(), title: document.getElementById('title').value, category: document.getElementById('category').value, imageUrl: document.getElementById('image-url').value || `https://picsum.photos/seed/${Date.now()}/400/250.jpg`, content: document.getElementById('content').value, date: new Date().toISOString() }; addArticle(newArticle); });
+
+        // --- INISIALISASI UMUM ---
+        const hamburger = document.getElementById('hamburger'); const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+        const logoText = document.querySelector('.logo-text'); const text = logoText.innerText; logoText.innerHTML = ''; text.split('').forEach((letter, index) => { const span = document.createElement('span'); span.classList.add('letter'); span.innerText = letter === ' ' ? '\u00A0' : letter; span.style.animationDelay = `${index * 0.05}s`; logoText.appendChild(span); });
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        renderArticles();
+    });
+    </script>
+</body>
+</html>
